@@ -303,11 +303,11 @@ class LinePlot(Gadget):
             scrollwheel_enabled=False,
             alpha=0,
         )
-        self._x_ticks = Text(default_cell=default_cell)
-        self._y_ticks = Text(default_cell=default_cell)
-        self._x_ticks_container = Gadget(is_transparent=True)
-        self._y_ticks_container = Gadget(is_transparent=True)
-        self._tick_corner = Text(size=(3, TICK_WIDTH + 1), default_cell=default_cell)
+        #self._x_ticks = Text(default_cell=default_cell)
+        #self._y_ticks = Text(default_cell=default_cell)
+        #self._x_ticks_container = Gadget(is_transparent=True)
+        #self._y_ticks_container = Gadget(is_transparent=True)
+        #self._tick_corner = Text(size=(3, TICK_WIDTH + 1), default_cell=default_cell)
         self._x_label_gadget = Text(default_cell=default_cell)
         self._y_label_gadget = Text(default_cell=default_cell)
         self._legend = _Legend(disable_oob=True, is_enabled=False)
@@ -341,6 +341,7 @@ class LinePlot(Gadget):
         self._traces_zoom_index = 0
         """Index of size hint in `PLOT_ZOOM` that `_traces` is using."""
 
+        '''
         def set_x_left():
             self._x_ticks.left = self._traces.left
 
@@ -350,15 +351,16 @@ class LinePlot(Gadget):
         self._traces.bind("pos", set_x_left)
         self._traces.bind("pos", set_y_top)
         self._tick_corner.canvas["char"][0, -1] = "└"
+        '''
 
         self._scroll_view.view = self._traces
-        self._x_ticks_container.add_gadget(self._x_ticks)
-        self._y_ticks_container.add_gadget(self._y_ticks)
+        #self._x_ticks_container.add_gadget(self._x_ticks)
+        #self._y_ticks_container.add_gadget(self._y_ticks)
         self._container.add_gadgets(
             self._scroll_view,
-            self._x_ticks_container,
-            self._y_ticks_container,
-            self._tick_corner,
+            #self._x_ticks_container,
+            #self._y_ticks_container,
+            #self._tick_corner,
             self._x_label_gadget,
             self._y_label_gadget,
             self._legend,
@@ -375,9 +377,9 @@ class LinePlot(Gadget):
     def is_transparent(self, is_transparent: bool):
         self._traces.is_transparent = is_transparent
         self._scroll_view.is_transparent = is_transparent
-        self._x_ticks.is_transparent = is_transparent
-        self._y_ticks.is_transparent = is_transparent
-        self._tick_corner.is_transparent = is_transparent
+        #self._x_ticks.is_transparent = is_transparent
+        #self._y_ticks.is_transparent = is_transparent
+        #self._tick_corner.is_transparent = is_transparent
         self._x_label_gadget.is_transparent = is_transparent
         self._y_label_gadget.is_transparent = is_transparent
         self._container.is_transparent = is_transparent
@@ -477,11 +479,11 @@ class LinePlot(Gadget):
         sv_left = has_y_label + TICK_WIDTH
         self._scroll_view.pos = 0, sv_left
         self._scroll_view.size = h - 2 - has_x_label, w - sv_left
-        self._y_ticks_container.left = has_y_label
-        self._y_ticks_container.size = self._scroll_view.height, TICK_WIDTH
-        self._x_ticks_container.top = self._scroll_view.bottom
-        self._x_ticks_container.left = self._y_ticks_container.right
-        self._x_ticks_container.size = 2, self._scroll_view.width
+        #self._y_ticks_container.left = has_y_label
+        #self._y_ticks_container.size = self._scroll_view.height, TICK_WIDTH
+        #self._x_ticks_container.top = self._scroll_view.bottom
+        #self._x_ticks_container.left = self._y_ticks_container.right
+        #self._x_ticks_container.size = 2, self._scroll_view.width
 
         self._x_label_gadget.pos = (
             h - 1,
@@ -557,6 +559,7 @@ class LinePlot(Gadget):
                 chars_view[where_boxes] = boxes[where_boxes]
                 colors_view[where_boxes] = color
 
+        '''
         # Regenerate Ticks
         self._y_ticks.size = self._traces.height, TICK_WIDTH
         self._y_ticks.canvas["fg_color"] = self.plot_fg_color
@@ -591,6 +594,7 @@ class LinePlot(Gadget):
                 pos=(1, column),
             )
         self._x_ticks.canvas["char"][0, plot_right - 1] = "┐"
+        '''
 
     def on_size(self):
         """Rebuild plot on resize."""
