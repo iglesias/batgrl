@@ -34,13 +34,13 @@ VERTICAL_HALF = VERTICAL_SPACING // 2
 class _Legend(Movable, Text):
     def _build_legend(self):
         plot: LinePlot = self.parent.parent
-        colors = (
-            rainbow_gradient(len(self.labels))
-            if plot.line_colors is None
-            else plot.line_colors
-        )
-        self.is_enabled = self.labels and len(self.labels) == len(colors)
+        self.is_enabled = self.labels
         if self.is_enabled:
+            colors = (
+                rainbow_gradient(len(self.labels))
+                if plot.line_colors is None
+                else plot.line_colors
+            )
             height = len(self.labels) + 2
             width = max(map(str_width, self.labels)) + 6
 
