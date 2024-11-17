@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.15..3.30)
+project(cubes)
+find_package(pybind11 REQUIRED)
+add_executable(cubes cubes.cpp)
+set_property(TARGET cubes PROPERTY CXX_STANDARD 20)
+target_link_libraries(cubes PRIVATE pybind11::embed)
+set(CMAKE_BUILD_TYPE Debug)
